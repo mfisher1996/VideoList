@@ -30,42 +30,56 @@ public:
     // VideoList constructor
     // Initializes first and last to be pointing at nulls and custCount and len to 0
     VideoList(){first = nullptr;last= nullptr; len=0;};
+    
     // VideoList destructor
     // Deletes each member of the linked list.
     ~VideoList();
+    
     // insert(int)
     // inserts an int into the linked list.
     void insert(string insertItem);
+    
     // remove (int)
     // deletes the first element of the linked list that is the same as insertItem
     void remove(string deleteItem);
+    
     // print()
     // Outputs the movies that are in the list.
-    void print(); //***
+    void print(); 
+    
     // size()
     // an accessor for the len private member. returns the number of elements in the list.
     int size(){return len;};
+    
     // search(int)
     // returns true if the int passed is in the list.
     bool search(string searchItem);
+    
     // printCust()
     // outputs each customer in the customer vector
     void printCust();
+    
     // describe(string, string)
     // a modifier for node.description. assignes des to find(movie)->description.
     void describe(string movie, string des){find(movie)->descripton=des;};
+    
     // getDescrib(int)
     // An accessor of the private describe array. returns a description of a movie when passed 0-4.
     string getDescrib(string i){return find(i)->descripton;};
+    
     // returnMovie(int)
     // a modifier for the list. Inserts it into the linked list and sends the appropriate message to cout.
-    void returnMovie(string returnItem){cout << "You returned "<< returnItem << " to the Video Store.\n";insert(returnItem);incCount(returnItem);};
+    void returnMovie(string returnItem){cout << "You returned "<< returnItem << " to the Video Store.\n";insert(returnItem);};
+    
+    
     // incCount(string)
     // a modifier for the copies int in a node with the name 'movie'. increment copies.
     void incCount(string movie){cur=find(movie); if(cur==NULL){cout << movie <<" was not found in the list.\n";return;}cur->copies++;};
+    
     // decCount(string)
     // a modifier for the copies int in a node with the name 'movie'. deincrements copies.
     void decCount(string movie){cur=find(movie); if(cur==NULL){cout << movie <<" was not found in the list.\n";return;}cur->copies--;};
+    
     // printInStore()
     // an accessor for the movies nodes in videoList. prints the name if copies is greater than 0.
     void printInStore(){cur = first;while(cur!=NULL){if(cur->copies>0)cout << "Copies: " << cur->copies << "\tMovie: " << cur->name << endl;cur=cur->right;}};
@@ -78,19 +92,22 @@ void VideoList::insert(string insertItem){
     nNode->right = nullptr;
     nNode->left = nullptr;
     nNode->copies = 0;
-    
-    if(first==NULL){ // if list is empty
-        first = nNode;
-        last = nNode;
-        len++;
-    }
-    else{ // any other insert
-        last->right= nNode;
-        nNode->left = last;
-        last = nNode;
-        len++;
-    }
-    //sort();
+    if(find(insertItem)!=NULL){
+		find(insertItem)->copies++;
+		delete nNode;
+	}else{
+		if(first==NULL){ // if list is empty
+			first = nNode;
+			last = nNode;
+			len++;
+		}
+		else{ // any other insert
+			last->right= nNode;
+			nNode->left = last;
+			last = nNode;
+			len++;
+		}
+	}//sort();
 }
 
 bool VideoList::search(string searchItem){
@@ -199,6 +216,7 @@ VideoList::~VideoList(){
         remove(last->name);
     
 }
+
 
 #include <fstream>
 
