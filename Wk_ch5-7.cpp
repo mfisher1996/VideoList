@@ -78,7 +78,7 @@ public:
     
     // decCount(string)
     // a modifier for the copies int in a node with the name 'movie'. deincrements copies.
-    void decCount(string movie){cur=find(movie); if(cur==NULL){cout << movie <<" was not found in the list.\n";return;}cur->copies--;};
+    void decCount(string movie){cur=find(movie); if(cur==NULL){cout << movie <<" was not found in the list.\n";return;}if(cur->copies>0)cur->copies--;else cout << "There are no copies to rent\n";};
     
     // printInStore()
     // an accessor for the movies nodes in videoList. prints the name if copies is greater than 0.

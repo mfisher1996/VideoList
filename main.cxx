@@ -24,13 +24,33 @@
 
 #include <iostream>
 #include "Wk_ch5-7.cpp"
+#include "customerType.h"
+using namespace std;
+
+void retMovie(customerType cust, VideoList store, string rentItem)
+void rentMovie(customerType cust, VideoList store);
 
 int main(int argc, char **argv)
 {
 	VideoList list;
 	list.insert("Fast and Furious");
-	list.incCount("Fast and Furious");
+	while(int i=0 <2){
+		list.incCount("Fast and Furious");
+		i++
+		}
 	list.printInStore();
+	
 	return 0;
 }
 
+void rentMovie(customerType cust, VideoList store, string rentItem){
+	store.decCount(rentItem);
+	cust.rentVideo(rentItem);
+	
+}
+
+void retMovie(customerType cust, VideoList store, string rentItem){
+	store.incCount(rentItem);
+	cust.returnVideo(rentItem);
+	
+}
